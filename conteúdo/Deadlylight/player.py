@@ -47,10 +47,10 @@ class Player(pygame.sprite.Sprite):
                     self.atual = 0
                 self.image = self.andar_esquerda[int(self.atual)]
                 self.image = pygame.transform.scale(self.image, (64*2.5, 64*2.5))
-    
-            
-            
-            
-        
+            if teclas[pygame.K_a] and teclas[pygame.K_d]:
+                self.atual = 0
+                self.image = self.andar_direita[self.atual]
+                self.image = pygame.transform.scale(self.image, (64*2.5, 64*2.5))
+                
     def draw(self, tela):
         tela.blit(self.image, self.rect)
