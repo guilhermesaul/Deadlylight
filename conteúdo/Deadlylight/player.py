@@ -22,9 +22,9 @@ class Player(pygame.sprite.Sprite):
             
         self.atual = 0
         self.image = self.andar_direita[self.atual]
-        self.image = pygame.transform.scale(self.image, (64*3, 64*3))
+        self.image = pygame.transform.scale(self.image, (64*2.5, 64*2.5))
         self.x = 300
-        self.y = 337
+        self.y = 369
         self.rect = self.image.get_rect()
         self.rect.top = self.y
         self.rect.left = self.x
@@ -39,14 +39,14 @@ class Player(pygame.sprite.Sprite):
                 if self.atual >= len(self.andar_direita):
                     self.atual = 0
                 self.image = self.andar_direita[int(self.atual)]
-                self.image = pygame.transform.scale(self.image, (64*3, 64*3))
+                self.image = pygame.transform.scale(self.image, (64*2.5, 64*2.5))
             if teclas[pygame.K_a]:
                 self.x -= self.velocidade
                 self.rect.left = self.x
                 if self.atual >= len(self.andar_esquerda):
                     self.atual = 0
                 self.image = self.andar_esquerda[int(self.atual)]
-                self.image = pygame.transform.scale(self.image, (64*3, 64*3))
+                self.image = pygame.transform.scale(self.image, (64*2.5, 64*2.5))
     
             
             
