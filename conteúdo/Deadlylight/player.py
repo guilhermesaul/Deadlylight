@@ -4,16 +4,24 @@ import os
 class Player(pygame.sprite.Sprite):
     def __init__(self,):
         super().__init__()
-        self.sprites = []
-        self.caminhos = [
+        self.andar_direita = []
+        self.andar_esquerda = []
+        self.caminho_direita = [
             os.path.join(os.path.dirname(__file__), "data", "images", f"andar_direita{i}.png")
-            for i in range (1, 6)
+            for i in range(1, 6)
         ]
+        for caminho in self.caminho_direita:
+            self.andar_direita.append(pygame.image.load(caminho))
         
-        for caminho in self.caminhos:
-            self.sprites.append(pygame.image.load(caminho))
+        self.caminho_esquerda = [
+            os.path.join(os.path.dirname(__file__), "data", "images", f"andar_esquerda{i}.png")
+            for i in range(1, 6)
+        ]
+        for caminho in self.caminho_esquerda:
+            self.andar_esquerda.append(pygame.image.load(caminho))
+            
         self.atual = 0
-        self.image = self.sprites[self.atual]
+        self.image = self.andar_direita[self.atual]
         self.image = pygame.transform.scale(self.image, (64*3, 64*3))
         self.x = 300
         self.y = 337
@@ -23,14 +31,24 @@ class Player(pygame.sprite.Sprite):
         self.velocidade = 7
         
     def update(self, teclas):
-        if teclas[pygame.K_d]:
-            self.x += self.velocidade
-            self.rect.left = self.x
+        if teclas == pygame.key.get_pressed():
             self.atual += 0.2
-            if self.atual >= len(self.sprites):
-                self.atual = 0
-            self.image = self.sprites[int(self.atual)]
-            self.image = pygame.transform.scale(self.image, (64*3, 64*3))
+            if teclas[pygame.K_d]:
+                self.x += self.velocidade
+                self.rect.left = self.x
+                if self.atual >= len(self.andar_direita):
+                    self.atual = 0
+                self.image = self.andar_direita[int(self.atual)]
+                self.image = pygame.transform.scale(self.image, (64*3, 64*3))
+            if teclas[pygame.K_a]:
+                self.x -= self.velocidade
+                self.rect.left = self.x
+                if self.atual >= len(self.andar_esquerda):
+                    self.atual = 0
+                self.image = self.andar_esquerda[int(self.atual)]
+                self.image = pygame.transform.scale(self.image, (64*3, 64*3))
+    
+            
             
             
         
