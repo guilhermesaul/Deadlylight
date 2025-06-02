@@ -17,16 +17,19 @@ fundo = pygame.image.load(caminho)
 relogio = pygame.time.Clock()
 
 while True:
-    for event in pygame.event.get():
+    teclas = pygame.key.get_pressed()
+    relogio.tick(30)
+    tela.blit(fundo, (0, 0))
+    eventos = pygame.event.get()
+    
+    for event in eventos:
         if event.type == pygame.QUIT:
             exit()
             
-    relogio.tick(30)
-    tela.blit(fundo, (0, 0))
     tela.blit(hud.exibe_vida(tela), (990, 20))
     tela.blit(hud.exibe_fome(tela), (1100, 20))
     tela.blit(hud.exibe_sede(tela), (1200, 20))
-    teclas = pygame.key.get_pressed()
+    hud.exibir_arma(tela, eventos)
     player.draw(tela)
     player.update(teclas)
      
