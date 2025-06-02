@@ -12,6 +12,8 @@ class Hud:
         self.cor = (0, 0, 0)
         self.fonte = pygame.font.SysFont("arial", self.tamanho, True)
         self.texto_formatado = self.fonte.render(self.mensagem, True, self.cor)
+        self.municao = "| 12 munições"
+        self.texto_munição = self.fonte.render(self.municao, True, self.cor)
         
     def exibe_vida(self, tela):
         self.caminho = os.path.join("data", "images", "coracao1.png")
@@ -44,3 +46,4 @@ class Hud:
             self.imagem = pygame.image.load(self.caminho)
             self.imagem = pygame.transform.scale(self.imagem, (32*2, 32*2))
             tela.blit(self.imagem, (70, 20))
+            tela.blit(self.texto_munição, (140, 25))
