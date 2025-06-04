@@ -7,14 +7,14 @@ class Player(pygame.sprite.Sprite):
         self.andar_direita = []
         self.andar_esquerda = []
         self.caminho_direita = [
-            os.path.join(os.path.dirname(__file__), "data", "images", f"andar_direita{i}.png")
+            os.path.join(os.path.dirname(__file__), "data", "images", "animacao_andar", f"andar_direita{i}.png")
             for i in range(1, 6)
         ]
         for caminho in self.caminho_direita:
             self.andar_direita.append(pygame.image.load(caminho))
         
         self.caminho_esquerda = [
-            os.path.join(os.path.dirname(__file__), "data", "images", f"andar_esquerda{i}.png")
+            os.path.join(os.path.dirname(__file__), "data", "images", "animacao_andar", f"andar_esquerda{i}.png")
             for i in range(1, 6)
         ]
         for caminho in self.caminho_esquerda:

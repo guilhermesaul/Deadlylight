@@ -16,21 +16,21 @@ class Hud:
         self.texto_munição = self.fonte.render(self.municao, True, self.cor)
         
     def exibe_vida(self, tela):
-        self.caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "coracao1.png")
+        self.caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "hud", "coracao1.png")
         self.imagem = pygame.image.load(self.caminho)
         self.imagem = pygame.transform.scale(self.imagem, (16*2.75, 16*2.75))
         tela.blit(self.imagem, (940, 22.5))
         return self.texto_formatado
     
     def exibe_fome(self, tela):
-        self.caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "fome1.png")
+        self.caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "hud", "fome1.png")
         self.imagem = pygame.image.load(self.caminho)
         self.imagem = pygame.transform.scale(self.imagem, (16*2, 16*2))
         tela.blit(self.imagem, (1065, 30))
         return self.texto_formatado
     
     def exibe_sede(self, tela):
-        self.caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "sede1.png")
+        self.caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "hud", "sede1.png")
         self.imagem = pygame.image.load(self.caminho)
         self.imagem = pygame.transform.scale(self.imagem, (16*2.75, 16*2.75))
         tela.blit(self.imagem, (1160, 21))
