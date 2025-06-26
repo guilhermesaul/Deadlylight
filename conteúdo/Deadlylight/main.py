@@ -25,6 +25,9 @@ while True:
     for event in eventos:
         if event.type == pygame.QUIT:
             exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_1:
+                player.segurando_glock = not player.segurando_glock
             
     tela.blit(hud.exibe_vida(tela), (990, 20))
     tela.blit(hud.exibe_fome(tela), (1100, 20))
