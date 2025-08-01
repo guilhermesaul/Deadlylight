@@ -1,14 +1,14 @@
 import pygame
 import sys
-from utils.config import FONTE_GRANDE, BRANCO, CINZA
+import utils.config as config
 
 class Button:
     def __init__(self, text, pos, callback, font):
         self.text = text
         self.callback = callback
         self.font = font
-        self.text_color = BRANCO
-        self.hover_color = CINZA
+        self.text_color = config.BRANCO
+        self.hover_color = config.CINZA
         self.label = self.font.render(self.text, True, self.text_color)
         self.rect = self.label.get_rect(center=pos)
 
