@@ -2,7 +2,6 @@ import pygame
 import os
 from player import Player
 from ui.hud import Hud
-from ui.menus import PauseMenu
 
 pygame.init()
 
@@ -16,10 +15,6 @@ pygame.display.set_caption("Começando")
 caminho = os.path.join(os.path.dirname(__file__), "data", "images", "background.png")
 fundo = pygame.image.load(caminho)
 relogio = pygame.time.Clock()
-pause_menu = PauseMenu(tela)
-
-pause = False
-
 
 while True:
     teclas = pygame.key.get_pressed()
@@ -43,10 +38,6 @@ while True:
     if teclas[pygame.K_ESCAPE]:
         pause = not pause
         pygame.time.wait(200)
-
-    if not pause:
-        player.update(teclas)
-    else:
-        pause_menu.desenhar()
+    player.update(teclas)
         
     pygame.display.flip()
