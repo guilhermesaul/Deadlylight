@@ -1,24 +1,24 @@
 import pygame
-from utils.config import FONTE_GRANDE, BRANCO
+import sys
+from utils.config import FONTE_GRANDE, BRANCO, CINZA
 
-class PauseMenu:
-    def __init__(self, tela):
-        self.tela = tela
-        self.fonte_pequena = pygame.font.SysFont("arial", 25)
+class Button:
+    def __init__(self, text, pos, callback, font):
+        self.text = text
+        self.callback = callback
+        self.font = font
+        self.text_color = BRANCO
+        self.hover_color = CINZA
+        self.label = self.font.render(self.text, True, self.text_color)
+        self.rect = self.label.get_rect(center=pos)
 
-    def desenhar(self):
-        overlay = pygame.Surface(self.tela.get_size(), pygame.SRCALPHA)
-        overlay.fill((0, 0, 0, 180))
-        self.tela.blit(overlay, (0, 0))
+    def hover(self, surface, mouse_pos):
+        if self.rect.collidepoint(mouse_pos):
+            label = FONT.render(self.text, True, self.hover_color)
+        else:
+            label = self.label
+        surface.blit(label, self.rect)
 
-        texto = FONTE_GRANDE.render("JOGO PAUSADO", True, BRANCO)
-        subtexto = self.fonte_pequena.render("Pressione ESC para continuar", True, BRANCO)
-
-        self.tela.blit(texto, (
-            self.tela.get_width() // 2 - texto.get_width() // 2,
-            200
-        ))
-        self.tela.blit(subtexto, (
-            self.tela.get_width() // 2 - subtexto.get_width() // 2,
-            260
-        ))
+    def check_click(self, mouse_pos):
+        if self.rect.collidepoint(mouse_pos):
+            self.callback()
