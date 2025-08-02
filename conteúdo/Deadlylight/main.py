@@ -1,5 +1,6 @@
 import pygame
 import os
+import sys
 from player import Player
 from ui.hud import Hud
 from ui.menus import Menu
