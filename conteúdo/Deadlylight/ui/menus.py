@@ -8,7 +8,7 @@ class Button:
         self.text = text
         self.callback = callback
         self.font = font
-        self.text_color = config.PRETO
+        self.text_color = config.AMARELO
         self.hover_color = config.CINZA
         self.label = self.font.render(self.text, True, self.text_color)
         self.rect = self.label.get_rect(center=pos)
@@ -29,7 +29,7 @@ class Menu:
         self.screen = screen
         self.start_callback = start_callback
         self.running = True
-        background = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "images", "background.png"))
+        background = os.path.join(os.path.dirname(__file__), "..", "data", "images", "bg-tela-inicial.png")
         self.background = pygame.image.load(background).convert()
         mid_x = screen.get_width() // 2
         start_y = screen.get_height() // 2 - 50

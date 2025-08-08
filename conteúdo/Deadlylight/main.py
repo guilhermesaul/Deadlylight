@@ -4,15 +4,14 @@ import sys
 from player import Player
 from ui.hud import Hud
 from ui.menus import Menu
+import utils.config as config
 
 pygame.init()
 
 player = Player()
 hud = Hud()
 
-largura = 1280
-altura = 720
-tela = pygame.display.set_mode((largura, altura), 0)
+tela = pygame.display.set_mode((config.LARGURA, config.ALTURA), 0)
 pygame.display.set_caption("Começando")
 caminho = os.path.join(os.path.dirname(__file__), "data", "images", "background.png")
 fundo = pygame.image.load(caminho)
@@ -23,7 +22,7 @@ def iniciar_jogo():
     running = True
     while running:
         teclas = pygame.key.get_pressed()
-        relogio.tick(30)
+        relogio.tick(config.FPS)
         eventos = pygame.event.get()
 
         for event in eventos:

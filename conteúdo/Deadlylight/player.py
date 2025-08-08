@@ -40,11 +40,11 @@ class Player(pygame.sprite.Sprite):
         self.image = self.andar_direita[self.atual]
         self.image = pygame.transform.scale(self.image, (64*3, 64*3))
         self.x = 300
-        self.y = 337
+        self.y = 350
         self.rect = self.image.get_rect()
         self.rect.top = self.y
         self.rect.left = self.x
-        self.velocidade = 7
+        self.velocidade = 4
         self.segurando_glock = False
         
     def update(self, teclas):
@@ -78,6 +78,7 @@ class Player(pygame.sprite.Sprite):
                 if self.atual >= len(self.andar_esquerda):
                     self.atual = 0
                 self.image = self.andar_esquerda[int(self.atual)]
+                
         if not teclas[pygame.K_a] and not teclas[pygame.K_d]:
             if self.segurando_glock:
                 self.image = self.andar_direita_glock[0]
