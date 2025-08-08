@@ -32,7 +32,7 @@ class Menu:
         background = os.path.join(os.path.dirname(__file__), "..", "data", "images", "bg-tela-inicial.png")
         self.background = pygame.image.load(background).convert()
         mid_x = screen.get_width() // 2
-        start_y = screen.get_height() // 2 - 50
+        start_y = screen.get_height() // 2
         gap = 70
         self.buttons = [
             Button("Iniciar Jogo", (mid_x, start_y), self.start_game, config.FONT),
