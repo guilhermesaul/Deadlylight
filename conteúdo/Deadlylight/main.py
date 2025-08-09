@@ -12,7 +12,7 @@ player = Player()
 hud = Hud()
 
 tela = pygame.display.set_mode((config.LARGURA, config.ALTURA), 0)
-pygame.display.set_caption("Começando")
+pygame.display.set_caption("Deadlylight")
 caminho = os.path.join(os.path.dirname(__file__), "data", "images", "background.png")
 fundo = pygame.image.load(caminho)
 relogio = pygame.time.Clock()
