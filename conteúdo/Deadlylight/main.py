@@ -5,6 +5,7 @@ from player import Player
 from ui.hud import Hud
 from ui.menus import Menu
 import utils.config as config
+from ui.story import mostrar_historia
 
 pygame.init()
 
@@ -18,6 +19,7 @@ fundo = pygame.image.load(caminho)
 relogio = pygame.time.Clock()
 
 def iniciar_jogo():
+    mostrar_historia(tela)
     pause = False
     running = True
     while running:
