@@ -13,8 +13,8 @@ def mostrar_historia(tela):
         "Consumidas pelo silêncio e pelo medo.",
         "Todos morreram ou se transformaram em...",
         "Criaturas sedentas por carne humana.",
-        "Você é o único sobrevivente.",
-        "Sozinho, precisa lutar pela sua vida."
+        "Você é a única sobrevivente.",
+        "Sozinha, precisa lutar pela sua vida."
     ]
 
     caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "bg_completo.jpeg")
@@ -47,7 +47,7 @@ def mostrar_historia(tela):
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
+                if event.key == pygame.K_SPACE:
                     rodando = False
 
         x -= 1
@@ -78,6 +78,9 @@ def mostrar_historia(tela):
 
         texto_surface.set_alpha(transparencia)
         texto_rect = texto_surface.get_rect(center=(config.LARGURA//2, config.ALTURA//2))
+        texto_pular = fonte.render("Pressione ESPAÇO para pular", True, (255, 255, 255))
+        texto_pular_rect = texto_pular.get_rect(center=(config.LARGURA//2, config.ALTURA - 75))
+        tela.blit(texto_pular, texto_pular_rect)
         tela.blit(texto_surface, texto_rect)
 
         pygame.display.flip()
