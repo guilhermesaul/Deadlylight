@@ -17,7 +17,7 @@ def mostrar_historia(tela):
         "Sozinha, precisa lutar pela sua vida."
     ]
 
-    caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "bg_completo.jpeg")
+    caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "bg_completo.png")
     caminho1 = os.path.normpath(caminho)
     fundo = pygame.image.load(caminho1).convert()
     altura_desejada = config.ALTURA
@@ -50,7 +50,7 @@ def mostrar_historia(tela):
                 if event.key == pygame.K_SPACE:
                     rodando = False
 
-        x -= 1
+        x -= 5.75
         if x <= -largura + config.LARGURA:
             x = -largura + config.LARGURA  
 
@@ -84,4 +84,4 @@ def mostrar_historia(tela):
         tela.blit(texto_surface, texto_rect)
 
         pygame.display.flip()
-        relogio.tick(30)
+        relogio.tick(config.FPS)
