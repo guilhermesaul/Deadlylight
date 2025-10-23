@@ -4,8 +4,11 @@ import sys
 from player import Player
 from ui.hud import Hud
 from ui.menus import Menu
+caminhoimagem = os.path.join(os.path.dirname(__file__), "data", "images", "mapa", "caminho-1.png")
+fundo = pygame.image.load(caminhoimagem)
 import utils.config as config
 from ui.story import mostrar_historia
+import ui.maps as maps
 
 pygame.init()
 
@@ -14,8 +17,7 @@ hud = Hud()
 
 tela = pygame.display.set_mode((config.LARGURA, config.ALTURA), 0)
 pygame.display.set_caption("Deadlylight")
-caminho = os.path.join(os.path.dirname(__file__), "data", "images", "background.png")
-fundo = pygame.image.load(caminho)
+fundo = pygame.image.load(caminhoimagem)
 relogio = pygame.time.Clock()
 
 def iniciar_jogo():
