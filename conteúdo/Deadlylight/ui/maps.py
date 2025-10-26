@@ -1,8 +1,6 @@
 import pygame
 import os
 
-pygame.init()
-
 class Mapa:
     def __init__(self):
         self.caminho1 = os.path.join(os.path.dirname(__file__), "..", "data", "images", "maps", "caminho-1.png")
@@ -32,9 +30,6 @@ class Mapa:
         for i in range(len(self.lista_mapas)):
             imagem_mapas = pygame.image.load(self.lista_mapas[i])
             self.mapa.append(imagem_mapas)
-        
-    def draw(self, tela):
-        tela.blit(self.mapa[self.indiceAtual], (0, 0))
     def mudar_mapa(self, direcao):
         if direcao == "direita":
             if self.indiceAtual == len(self.mapa) - 1:
@@ -46,3 +41,7 @@ class Mapa:
                 pass
             else:
                 self.indiceAtual -= 1
+        
+    def draw(self, tela):
+        tela.blit(self.mapa[self.indiceAtual], (0, 0))
+        

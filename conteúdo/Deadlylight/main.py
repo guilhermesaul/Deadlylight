@@ -36,7 +36,6 @@ def iniciar_jogo():
                 if event.key == pygame.K_1:
                     player.segurando_glock = not player.segurando_glock
 
-        # Desenha os elementos na tela
         mapa.draw(tela)
         player.draw(tela)
         tela.blit(hud.exibe_vida(tela), (990, 20))
@@ -49,6 +48,17 @@ def iniciar_jogo():
             pygame.time.wait(200)
 
         player.update(teclas)
+
+        if player.rect.right >= LARGURA:
+            mapa.mudar_mapa("direita")
+            player.x = 10
+            player.rect.left = player.x
+            # pygame.time.wait(150) removido por enquanto, porque dá a sensação de travamento
+        elif player.rect.left <= 0:
+            mapa.mudar_mapa("esquerda")
+            player.x = LARGURA - player.rect.width - 10
+            player.rect.left = player.x
+            # pygame.time.wait(150) removido por enquanto, porque dá a sensação de travamento
 
         pygame.display.flip()
 
