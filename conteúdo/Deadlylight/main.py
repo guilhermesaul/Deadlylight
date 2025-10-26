@@ -4,20 +4,19 @@ import sys
 from player import Player
 from ui.hud import Hud
 from ui.menus import Menu
-caminhoimagem = os.path.join(os.path.dirname(__file__), "data", "images", "mapa", "caminho-1.png")
-fundo = pygame.image.load(caminhoimagem)
-import utils.config as config
+from utils.config import * 
 from ui.story import mostrar_historia
-import ui.maps as maps
+from ui.maps import Mapa
+
 
 pygame.init()
 
 player = Player()
 hud = Hud()
+mapa = Mapa()
 
-tela = pygame.display.set_mode((config.LARGURA, config.ALTURA), 0)
+tela = pygame.display.set_mode((LARGURA, ALTURA), 0)
 pygame.display.set_caption("Deadlylight")
-fundo = pygame.image.load(caminhoimagem)
 relogio = pygame.time.Clock()
 
 def iniciar_jogo():
@@ -26,7 +25,7 @@ def iniciar_jogo():
     running = True
     while running:
         teclas = pygame.key.get_pressed()
-        relogio.tick(config.FPS)
+        relogio.tick(FPS)
         eventos = pygame.event.get()
 
         for event in eventos:
@@ -37,13 +36,13 @@ def iniciar_jogo():
                 if event.key == pygame.K_1:
                     player.segurando_glock = not player.segurando_glock
 
-        tela.blit(fundo, (0, 0))
-
+        # Desenha os elementos na tela
+        mapa.draw(tela)
+        player.draw(tela)
         tela.blit(hud.exibe_vida(tela), (990, 20))
         tela.blit(hud.exibe_fome(tela), (1100, 20))
         tela.blit(hud.exibe_sede(tela), (1200, 20))
         hud.exibir_arma(tela, eventos)
-        player.draw(tela)
 
         if teclas[pygame.K_ESCAPE]:
             pause = not pause
