@@ -1,6 +1,8 @@
 import pygame
 import os
 
+pygame.init()
+
 BRANCO = (255, 255, 255)
 CINZA = (120, 120, 120)
 PRETO = (0, 0, 0)

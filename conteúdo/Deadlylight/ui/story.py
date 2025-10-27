@@ -1,7 +1,7 @@
 import pygame
 import sys
 import os
-from utils.config import *
+from .config import *
 
 def mostrar_historia(tela):
     fonte = FONT

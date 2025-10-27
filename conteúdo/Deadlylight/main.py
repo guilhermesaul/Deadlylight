@@ -4,20 +4,21 @@ import sys
 from player import Player
 from ui.hud import Hud
 from ui.menus import Menu
-from utils.config import * 
+from ui.config import * 
 from ui.story import mostrar_historia
 from ui.maps import Mapa
 
 
 pygame.init()
 
-player = Player()
-hud = Hud()
-mapa = Mapa()
 
 tela = pygame.display.set_mode((larguraTela, alturaTela), 0)
 pygame.display.set_caption("Deadlylight")
 relogio = pygame.time.Clock()
+
+player = Player()
+hud = Hud()
+mapa = Mapa()
 
 def iniciar_jogo():
     mostrar_historia(tela)

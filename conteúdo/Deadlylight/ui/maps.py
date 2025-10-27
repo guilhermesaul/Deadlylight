@@ -1,5 +1,6 @@
 import pygame
 import os
+from .config import *
 
 class Mapa:
     def __init__(self):
@@ -41,7 +42,7 @@ class Mapa:
                 pass
             else:
                 self.indiceAtual -= 1
-        
+
     def draw(self, tela):
         tela.blit(self.mapa[self.indiceAtual], (0, 0))
         

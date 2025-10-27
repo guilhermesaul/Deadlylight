@@ -1,9 +1,8 @@
 import pygame
 import os
+from .config import *
 
 pygame.font.init()
-larguraTela = 1280
-alturaTela = 720
 
 class Hud:
     def __init__(self):

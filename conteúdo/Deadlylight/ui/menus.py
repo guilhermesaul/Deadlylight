@@ -1,7 +1,7 @@
 import pygame
 import sys
 import os
-from utils.config import *
+from .config import *
 
 class Button:
     def __init__(self, text, pos, callback, font):
