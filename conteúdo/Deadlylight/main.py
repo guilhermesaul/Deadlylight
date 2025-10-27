@@ -48,16 +48,25 @@ def iniciar_jogo():
 
         player.update(teclas)
 
-        if player.rect.right >= larguraTela:
-            mapa.mudar_mapa("direita")
-            player.x = 10
-            player.rect.left = player.x
-            # pygame.time.wait(150) removido por enquanto, porque dá a sensação de travamento
-        elif player.rect.left <= 0:
-            mapa.mudar_mapa("esquerda")
-            player.x = larguraTela - player.rect.width - 10
-            player.rect.left = player.x
-            # pygame.time.wait(150) removido por enquanto, porque dá a sensação de travamento
+        if player.rect.right > larguraTela:
+            if mapa.indiceAtual < len(mapa.lista_mapas) - 1:
+                mapa.mudar_mapa("direita")
+                player.x = 10
+                player.rect.left = player.x
+            else:
+                player.x = larguraTela - player.rect.width
+                player.rect.left = player.x
+                # pygame.time.wait(150) removido por enquanto, porque dá a sensação de travamento
+            
+        elif player.rect.left < 0:
+            if mapa.indiceAtual > 0:
+                mapa.mudar_mapa("esquerda")
+                player.x = larguraTela - player.rect.width - 10
+                player.rect.left = player.x
+            else:
+                player.x = 1
+                player.rect.left = player.x
+                # pygame.time.wait(150) removido por enquanto, porque dá a sensação de travamento
 
         pygame.display.flip()
 
