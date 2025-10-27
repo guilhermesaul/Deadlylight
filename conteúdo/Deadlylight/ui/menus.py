@@ -1,21 +1,21 @@
 import pygame
 import sys
 import os
-import utils.config as config
+from utils.config import *
 
 class Button:
     def __init__(self, text, pos, callback, font):
         self.text = text
         self.callback = callback
         self.font = font
-        self.text_color = config.AMARELO
-        self.hover_color = config.CINZA
+        self.text_color = AMARELO
+        self.hover_color = CINZA
         self.label = self.font.render(self.text, True, self.text_color)
         self.rect = self.label.get_rect(center=pos)
 
     def hover(self, surface, mouse_pos):
         if self.rect.collidepoint(mouse_pos):
-            label = config.FONT.render(self.text, True, self.hover_color)
+            label = FONT.render(self.text, True, self.hover_color)
         else:
             label = self.label
         surface.blit(label, self.rect)
@@ -35,9 +35,9 @@ class Menu:
         start_y = screen.get_height() // 2
         gap = 70
         self.buttons = [
-            Button("Iniciar Jogo", (mid_x, start_y), self.start_game, config.FONT),
-            Button("Opções", (mid_x, start_y + gap), self.show_options, config.FONT),
-            Button("Sair", (mid_x, start_y + 2 * gap), self.exit_game, config.FONT),
+            Button("Iniciar Jogo", (mid_x, start_y), self.start_game, FONT),
+            Button("Opções", (mid_x, start_y + gap), self.show_options, FONT),
+            Button("Sair", (mid_x, start_y + 2 * gap), self.exit_game, FONT),
         ]
     
     def start_game(self):
@@ -62,9 +62,9 @@ class Menu:
                     for btn in self.buttons:
                         btn.check_click(mouse_pos)
 
-            self.screen.blit(self.background, (0, 0))  # ← desenha o fundo aqui
+            self.screen.blit(self.background, (0, 0))
             for btn in self.buttons:
                 btn.hover(self.screen, mouse_pos)
 
             pygame.display.flip()
-            clock.tick(config.FPS)
+            clock.tick(FPS)

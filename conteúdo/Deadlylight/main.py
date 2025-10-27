@@ -15,7 +15,7 @@ player = Player()
 hud = Hud()
 mapa = Mapa()
 
-tela = pygame.display.set_mode((LARGURA, ALTURA), 0)
+tela = pygame.display.set_mode((larguraTela, alturaTela), 0)
 pygame.display.set_caption("Deadlylight")
 relogio = pygame.time.Clock()
 
@@ -49,14 +49,14 @@ def iniciar_jogo():
 
         player.update(teclas)
 
-        if player.rect.right >= LARGURA:
+        if player.rect.right >= larguraTela:
             mapa.mudar_mapa("direita")
             player.x = 10
             player.rect.left = player.x
             # pygame.time.wait(150) removido por enquanto, porque dá a sensação de travamento
         elif player.rect.left <= 0:
             mapa.mudar_mapa("esquerda")
-            player.x = LARGURA - player.rect.width - 10
+            player.x = larguraTela - player.rect.width - 10
             player.rect.left = player.x
             # pygame.time.wait(150) removido por enquanto, porque dá a sensação de travamento
 

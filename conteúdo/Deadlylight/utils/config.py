@@ -11,5 +11,5 @@ FONTE_GRANDE = pygame.font.SysFont("arial", 40, True, False)
 FPS = 60
 fonte = os.path.join(os.path.dirname(__file__), "..", "data", "fonts", "Capture it.ttf")
 FONT = pygame.font.Font(fonte, 48)
-LARGURA = 1280
-ALTURA = 720
+larguraTela = 1280
+alturaTela = 720

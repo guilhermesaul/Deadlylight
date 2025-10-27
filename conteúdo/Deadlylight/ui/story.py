@@ -1,10 +1,10 @@
 import pygame
 import sys
 import os
-import utils.config as config
+from utils.config import *
 
 def mostrar_historia(tela):
-    fonte = config.FONT
+    fonte = FONT
     
     historia = [
         "O mundo que conhecemos já não existe mais.",
@@ -20,7 +20,7 @@ def mostrar_historia(tela):
     caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "bg_completo.png")
     caminho1 = os.path.normpath(caminho)
     fundo = pygame.image.load(caminho1).convert()
-    altura_desejada = config.ALTURA
+    altura_desejada = alturaTela
     proporcao = altura_desejada / fundo.get_height()
     nova_largura = int(fundo.get_width() * proporcao)
     fundo = pygame.transform.scale(fundo, (nova_largura, altura_desejada))
@@ -51,8 +51,8 @@ def mostrar_historia(tela):
                     rodando = False
 
         x -= 5.75
-        if x <= -largura + config.LARGURA:
-            x = -largura + config.LARGURA  
+        if x <= -largura + larguraTela:
+            x = -largura + larguraTela  
 
         tela.fill((0, 0, 0))
         tela.blit(fundo, (x, y))
@@ -77,11 +77,11 @@ def mostrar_historia(tela):
                     texto_surface = fonte.render(historia[frase_indice], True, (255, 255, 255))
 
         texto_surface.set_alpha(transparencia)
-        texto_rect = texto_surface.get_rect(center=(config.LARGURA//2, config.ALTURA//2))
+        texto_rect = texto_surface.get_rect(center=(larguraTela//2, alturaTela//2))
         texto_pular = fonte.render("Pressione ESPAÇO para pular", True, (255, 255, 255))
-        texto_pular_rect = texto_pular.get_rect(center=(config.LARGURA//2, config.ALTURA - 75))
+        texto_pular_rect = texto_pular.get_rect(center=(larguraTela//2, alturaTela - 75))
         tela.blit(texto_pular, texto_pular_rect)
         tela.blit(texto_surface, texto_rect)
 
         pygame.display.flip()
-        relogio.tick(config.FPS)
+        relogio.tick(FPS)
