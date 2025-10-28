@@ -89,8 +89,8 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (64*3, 64*3))
     mapa = Mapa()
     def verificar_entrada(self, mapa=mapa):
-        if mapa.indiceAtual == 0:
-            if 600 <= self.rect.left <= 800:
+        if mapa.indiceAtual == 1:
+            if 700 <= self.rect.left <= 800:
                 return True
         return False
         
