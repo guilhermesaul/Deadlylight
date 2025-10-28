@@ -39,7 +39,7 @@ def iniciar_jogo():
 
         mapa.draw(tela)
         player.draw(tela)
-        hud.draw(tela)
+        hud.draw(tela, player)
         hud.exibir_arma(tela, eventos)
 
         if teclas[pygame.K_ESCAPE]:

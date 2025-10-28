@@ -1,6 +1,8 @@
 import pygame
 import os
 from .config import *
+from player import Player
+from .maps import Mapa
 
 pygame.font.init()
 
@@ -57,9 +59,10 @@ class Hud:
         self.rect_texto_entrar.centerx =  larguraTela // 2
         self.rect_texto_entrar.top = 30
         return tela.blit(self.texto_entrar, self.rect_texto_entrar)
-    
-    def draw(self, tela):
+    player = Player()
+    def draw(self, tela, player):
         self.exibe_vida(tela)
         self.exibe_fome(tela)
         self.exibe_sede(tela)
-        self.exibe_entrar(tela)
+        if player.verificar_entrada(mapa=Mapa()):
+            self.exibe_entrar(tela)

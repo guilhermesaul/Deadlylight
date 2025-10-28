@@ -1,5 +1,6 @@
 import pygame
-import os
+from ui.maps import Mapa
+from ui.config import *
 
 class Player(pygame.sprite.Sprite):
     def __init__(self,):
@@ -86,6 +87,12 @@ class Player(pygame.sprite.Sprite):
                 self.image = self.andar_direita[0]
                 
         self.image = pygame.transform.scale(self.image, (64*3, 64*3))
+    mapa = Mapa()
+    def verificar_entrada(self, mapa=mapa):
+        if mapa.indiceAtual == 0:
+            if 600 <= self.rect.left <= 800:
+                return True
+        return False
         
     def draw(self, tela):
         tela.blit(self.image, self.rect)
