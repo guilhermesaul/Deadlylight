@@ -39,14 +39,19 @@ def iniciar_jogo():
 
         mapa.draw(tela)
         player.draw(tela)
-        hud.draw(tela, player)
+        hud.draw(tela)
         hud.exibir_arma(tela, eventos)
+        print(player.x, player.rect.left)
 
         if teclas[pygame.K_ESCAPE]:
             pause = not pause
             pygame.time.wait(200)
 
         player.update(teclas)
+        
+        if mapa.indiceAtual == 1:
+            if 600 <= player.rect.left <= 775:
+                hud.exibe_entrar(tela)
 
         if player.rect.right > larguraTela:
             if mapa.indiceAtual < len(mapa.lista_mapas) - 1:

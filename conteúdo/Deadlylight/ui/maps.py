@@ -31,6 +31,7 @@ class Mapa:
         for i in range(len(self.lista_mapas)):
             imagem_mapas = pygame.image.load(self.lista_mapas[i])
             self.mapa.append(imagem_mapas)
+            
     def mudar_mapa(self, direcao):
         if direcao == "direita":
             if self.indiceAtual == len(self.mapa) - 1:
