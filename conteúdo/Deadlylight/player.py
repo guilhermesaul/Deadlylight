@@ -48,6 +48,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.left = self.x
         self.velocidade = 4
         self.segurando_glock = False
+        self.direcao = "direita" 
         
     def update(self, teclas):
         self.atual += 0.2
@@ -58,6 +59,7 @@ class Player(pygame.sprite.Sprite):
                 if self.atual >= len(self.andar_direita_glock):
                     self.atual = 0
                 self.image = self.andar_direita_glock[int(self.atual)]
+                self.direcao = "direita"
 
             elif teclas[pygame.K_a]:
                 self.x -= self.velocidade
@@ -65,6 +67,7 @@ class Player(pygame.sprite.Sprite):
                 if self.atual >= len(self.andar_esquerda_glock):
                     self.atual = 0
                 self.image = self.andar_esquerda_glock[int(self.atual)]
+                self.direcao = "esquerda"
 
         else:
             if teclas[pygame.K_d]:
@@ -73,6 +76,7 @@ class Player(pygame.sprite.Sprite):
                 if self.atual >= len(self.andar_direita):
                     self.atual = 0
                 self.image = self.andar_direita[int(self.atual)]
+                self.direcao = "direita"
 
             elif teclas[pygame.K_a]:
                 self.x -= self.velocidade
@@ -80,13 +84,20 @@ class Player(pygame.sprite.Sprite):
                 if self.atual >= len(self.andar_esquerda):
                     self.atual = 0
                 self.image = self.andar_esquerda[int(self.atual)]
+                self.direcao = "esquerda"
                 
         if not teclas[pygame.K_a] and not teclas[pygame.K_d]:
             if self.segurando_glock:
-                self.image = self.andar_direita_glock[0]
+                if self.direcao == "direita":
+                    self.image = self.andar_direita_glock[0]
+                else:
+                    self.image = self.andar_esquerda_glock[0]
             else:
-                self.image = self.andar_direita[0]
-                
+                if self.direcao == "direita":
+                    self.image = self.andar_direita[0]
+                else:
+                    self.image = self.andar_esquerda[0]
+
         self.image = pygame.transform.scale(self.image, (64*3, 64*3))
         
     def draw(self, tela):
