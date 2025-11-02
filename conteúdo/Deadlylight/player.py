@@ -87,6 +87,7 @@ class Player(pygame.sprite.Sprite):
                 self.direcao = "esquerda"
                 
         if not teclas[pygame.K_a] and not teclas[pygame.K_d]:
+            self.atual = 0
             if self.segurando_glock:
                 if self.direcao == "direita":
                     self.image = self.andar_direita_glock[0]

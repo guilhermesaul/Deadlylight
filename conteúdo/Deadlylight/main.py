@@ -41,7 +41,7 @@ def iniciar_jogo():
         player.draw(tela)
         hud.draw(tela)
         hud.exibir_arma(tela, eventos)
-        print(player.x, player.rect.left)
+        print(player.x)
 
         if teclas[pygame.K_ESCAPE]:
             pause = not pause
