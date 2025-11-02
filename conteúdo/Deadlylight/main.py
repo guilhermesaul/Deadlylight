@@ -50,7 +50,16 @@ def iniciar_jogo():
         player.update(teclas)
         
         if mapa.indiceAtual == 1:
-            if 600 <= player.rect.left <= 775:
+            if 615 <= player.rect.left <= 765:
+                hud.exibe_entrar(tela)
+        elif mapa.indiceAtual == 3:
+            if 925 <= player.rect.left <= 1070:
+                hud.exibe_entrar(tela)
+        elif mapa.indiceAtual == 5:
+            if 635 <= player.rect.left <= 760:
+                hud.exibe_entrar(tela)
+        elif mapa.indiceAtual == 7:
+            if 340 <= player.rect.left <= 460:
                 hud.exibe_entrar(tela)
 
         if player.rect.right > larguraTela:
