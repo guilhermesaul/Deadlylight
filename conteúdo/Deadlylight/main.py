@@ -56,10 +56,10 @@ def iniciar_jogo():
             if 925 <= player.rect.left <= 1070:
                 hud.exibe_entrar(tela)
         elif mapa.indiceAtual == 5:
-            if 635 <= player.rect.left <= 760:
+            if 620 <= player.rect.left <= 780:
                 hud.exibe_entrar(tela)
         elif mapa.indiceAtual == 7:
-            if 340 <= player.rect.left <= 460:
+            if 330 <= player.rect.left <= 465:
                 hud.exibe_entrar(tela)
 
         if player.rect.right > larguraTela:
