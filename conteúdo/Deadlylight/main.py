@@ -22,45 +22,64 @@ mapa = Mapa()
 
 def iniciar_jogo():
     mostrar_historia(tela)
-    pause = False
     running = True
+    na_loja = False
     while running:
         teclas = pygame.key.get_pressed()
         relogio.tick(FPS)
         eventos = pygame.event.get()
 
+        if na_loja:
+            tela.fill((0, 0, 0))
+        else:
+            mapa.draw(tela)
+            player.draw(tela)
+            hud.draw(tela)
+            hud.exibir_arma(tela, eventos)
+        
         for event in eventos:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_1:
-                    player.segurando_glock = not player.segurando_glock
+                if na_loja:
+                    if event.key == pygame.K_x:
+                        na_loja = not na_loja
+                else: 
+                    if event.key == pygame.K_1:
+                        player.segurando_glock = not player.segurando_glock
+                if event.key == pygame.K_e:
+                    if hud.area_entrar:
+                        na_loja = True
 
-        mapa.draw(tela)
-        player.draw(tela)
-        hud.draw(tela)
-        hud.exibir_arma(tela, eventos)
-        print(player.x)
-
-        if teclas[pygame.K_ESCAPE]:
-            pause = not pause
-            pygame.time.wait(200)
-
-        player.update(teclas)
+        player.update(teclas, na_loja)
+        
+        #print(player.x)
         
         if mapa.indiceAtual == 1:
             if 615 <= player.rect.left <= 765:
                 hud.exibe_entrar(tela)
+                hud.area_entrar = True
+            else: 
+                hud.area_entrar = False
         elif mapa.indiceAtual == 3:
             if 925 <= player.rect.left <= 1070:
                 hud.exibe_entrar(tela)
+                hud.area_entrar = True
+            else: 
+                hud.area_entrar = False
         elif mapa.indiceAtual == 5:
             if 620 <= player.rect.left <= 780:
                 hud.exibe_entrar(tela)
+                hud.area_entrar = True
+            else: 
+                hud.area_entrar = False
         elif mapa.indiceAtual == 7:
             if 330 <= player.rect.left <= 465:
                 hud.exibe_entrar(tela)
+                hud.area_entrar = True
+            else: 
+                hud.area_entrar = False
 
         if player.rect.right > larguraTela:
             if mapa.indiceAtual < len(mapa.lista_mapas) - 1:

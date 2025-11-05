@@ -16,6 +16,7 @@ class Hud:
         self.texto_formatado_40 = self.fonte_40.render(self.mensagem, True, self.cor)
         self.municao = "| 12 munições"
         self.texto_munição = self.fonte_40.render(self.municao, True, self.cor)
+        self.area_entrar = False
         
     def exibe_vida(self, tela):
         self.caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "hud", "coracao1.png")
