@@ -48,9 +48,9 @@ class Player(pygame.sprite.Sprite):
         self.segurando_glock = False
         self.direcao = "direita" 
         
-    def update(self, teclas, hud):
+    def update(self, teclas, na_loja):
         self.atual += 0.2
-        if hud.na_loja:
+        if na_loja:
             pass
         else:
             if self.segurando_glock:

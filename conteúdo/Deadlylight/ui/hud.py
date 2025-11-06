@@ -10,12 +10,13 @@ class Hud:
         self.mensagem = "100"
         self.tamanho_40 = 40
         self.tamanho_28 = 28
-        self.cor = (0, 0, 0)
+        self.cor_preto = (0, 0, 0)
+        self.cor_vermelho = (179, 0, 0)
         self.fonte_40 = pygame.font.SysFont("arial", self.tamanho_40, True)
         self.fonte_28 = pygame.font.SysFont("arial", self.tamanho_28, True)
-        self.texto_formatado_40 = self.fonte_40.render(self.mensagem, True, self.cor)
+        self.texto_formatado_40 = self.fonte_40.render(self.mensagem, True, self.cor_preto)
         self.municao = "| 12 munições"
-        self.texto_munição = self.fonte_40.render(self.municao, True, self.cor)
+        self.texto_munição = self.fonte_40.render(self.municao, True, self.cor_preto)
         self.area_entrar = False
         
     def exibe_vida(self, tela):
@@ -53,7 +54,7 @@ class Hud:
 
     def exibe_entrar(self, tela):
         self.mensagem_entrar = "Aperte 'E' para entrar."
-        self.texto_entrar = self.fonte_28.render(self.mensagem_entrar, True, self.cor)
+        self.texto_entrar = self.fonte_28.render(self.mensagem_entrar, True, self.cor_vermelho)
         self.rect_texto_entrar = self.texto_entrar.get_rect()
         self.rect_texto_entrar.centerx =  larguraTela // 2
         self.rect_texto_entrar.top = 30

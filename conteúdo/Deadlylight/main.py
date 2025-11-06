@@ -20,6 +20,12 @@ player = Player()
 hud = Hud()
 mapa = Mapa()
 
+caminho_ui_loja = os.path.join(os.path.dirname(__file__), "data", "images", "loja", "ui_loja.png")
+ui_loja = pygame.image.load(caminho_ui_loja)
+x_ui_loja = larguraTela // 2 - ui_loja.get_width() // 2
+y_ui_loja = alturaTela // 2 - ui_loja.get_height() // 2
+
+
 def iniciar_jogo():
     mostrar_historia(tela)
     running = True
@@ -30,7 +36,8 @@ def iniciar_jogo():
         eventos = pygame.event.get()
 
         if na_loja:
-            tela.fill((0, 0, 0))
+            tela.fill((41, 40, 40))
+            tela.blit(ui_loja, (x_ui_loja, y_ui_loja))
         else:
             mapa.draw(tela)
             player.draw(tela)
@@ -43,8 +50,7 @@ def iniciar_jogo():
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if na_loja:
-                    if event.key == pygame.K_x:
-                        na_loja = not na_loja
+                    pass
                 else: 
                     if event.key == pygame.K_1:
                         player.segurando_glock = not player.segurando_glock
@@ -57,26 +63,34 @@ def iniciar_jogo():
         #print(player.x)
         
         if mapa.indiceAtual == 1:
-            if 615 <= player.rect.left <= 765:
+            if 615 <= player.rect.left <= 765 and na_loja == False:
                 hud.exibe_entrar(tela)
+                hud.area_entrar = True
+            elif na_loja == True: 
                 hud.area_entrar = True
             else: 
                 hud.area_entrar = False
         elif mapa.indiceAtual == 3:
-            if 925 <= player.rect.left <= 1070:
+            if 925 <= player.rect.left <= 1070 and na_loja == False:
                 hud.exibe_entrar(tela)
+                hud.area_entrar = True
+            elif na_loja == True: 
                 hud.area_entrar = True
             else: 
                 hud.area_entrar = False
         elif mapa.indiceAtual == 5:
-            if 620 <= player.rect.left <= 780:
+            if 620 <= player.rect.left <= 780 and na_loja == False:
                 hud.exibe_entrar(tela)
+                hud.area_entrar = True
+            elif na_loja == True: 
                 hud.area_entrar = True
             else: 
                 hud.area_entrar = False
         elif mapa.indiceAtual == 7:
-            if 330 <= player.rect.left <= 465:
+            if 330 <= player.rect.left <= 465 and na_loja == False:
                 hud.exibe_entrar(tela)
+                hud.area_entrar = True
+            elif na_loja == True: 
                 hud.area_entrar = True
             else: 
                 hud.area_entrar = False
