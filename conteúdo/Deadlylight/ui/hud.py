@@ -7,6 +7,9 @@ pygame.font.init()
 class Hud:
     def __init__(self):
         self.mostrar = False
+        self.vida = 100
+        self.fome = 100
+        self.sede = 100
         self.mensagem = "100"
         self.tamanho_40 = 40
         self.tamanho_28 = 28
@@ -19,12 +22,15 @@ class Hud:
         self.texto_munição = self.fonte_40.render(self.municao, True, self.cor_preto)
         self.area_entrar = False
         
+        self.caminho_coracao = os.path.join(os.path.dirname(__file__), "..", "data", "images", "hud", "coracao1.png")
+        self.img_coracao = pygame.image.load(self.caminho_coracao)
+        self.img_coracao = pygame.transform.scale(self.img_coracao, (16*2.75, 16*2.75))
+        
     def exibe_vida(self, tela):
-        self.caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "hud", "coracao1.png")
-        self.imagem = pygame.image.load(self.caminho)
-        self.imagem = pygame.transform.scale(self.imagem, (16*2.75, 16*2.75))
-        tela.blit(self.imagem, (940, 22.5))
-        return tela.blit(self.texto_formatado_40, (990, 20))
+        texto_vida = self.fonte_40.render(str(self.vida), True, self.cor_preto)
+        
+        tela.blit(self.img_coracao, (940, 22.5))
+        tela.blit(texto_vida, (990, 20))
 
     def exibe_fome(self, tela):
         self.caminho = os.path.join(os.path.dirname(__file__), "..", "data", "images", "hud", "fome1.png")

@@ -7,6 +7,8 @@ from ui.menus import Menu
 from ui.config import * 
 from ui.story import mostrar_historia
 from ui.maps import Mapa
+from zumbi import Zombie
+from ui.tiros import Bullet
 
 
 pygame.init()
@@ -17,6 +19,7 @@ pygame.display.set_caption("Deadlylight")
 relogio = pygame.time.Clock()
 
 player = Player()
+zumbi = Zombie(800, 350)
 hud = Hud()
 mapa = Mapa()
 
@@ -30,7 +33,12 @@ def iniciar_jogo():
     mostrar_historia(tela)
     running = True
     na_loja = False
+    invencibilidade_timer = 0
     while running:
+        
+        if invencibilidade_timer > 0:
+            invencibilidade_timer -= 1
+
         teclas = pygame.key.get_pressed()
         relogio.tick(FPS)
         eventos = pygame.event.get()
@@ -40,6 +48,32 @@ def iniciar_jogo():
             tela.blit(ui_loja, (x_ui_loja, y_ui_loja))
         else:
             mapa.draw(tela)
+
+            player.bullets.update()
+            player.bullets.draw(tela)
+
+            tiros_recebidos = pygame.sprite.spritecollide(zumbi, player.bullets, True)
+            for tiro in tiros_recebidos:
+                zumbi.vida -= 1
+
+            if zumbi.vida <= 0:
+                # Move o zumbi para longe ou reseta (morte temporária)
+                zumbi.rect.x = -5000
+            zumbi.update(player.rect)
+            zumbi.draw(tela)
+
+            if player.rect.colliderect(zumbi.rect):
+                if invencibilidade_timer == 0:
+                    hud.vida -= 10  # Agora funciona, pois subtrai do número
+                    invencibilidade_timer = 60
+                    
+                    if hud.vida <= 0:
+                        hud.vida = 0
+                        pygame.quit()
+                        sys.exit()
+            hud.exibe_vida(tela)
+            hud.exibe_fome(tela)
+            hud.exibe_sede(tela)
             player.draw(tela)
             hud.draw(tela)
             hud.exibir_arma(tela, eventos)
@@ -48,6 +82,11 @@ def iniciar_jogo():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1: # 1 é o botão esquerdo
+                    player.atirar()
+
             if event.type == pygame.KEYDOWN:
                 if na_loja:
                     pass
@@ -57,6 +96,10 @@ def iniciar_jogo():
                 if event.key == pygame.K_e:
                     if hud.area_entrar:
                         na_loja = True
+                if event.key == pygame.K_q:
+                    if na_loja:
+                        na_loja = False
+            
 
         player.update(teclas, na_loja)
         
@@ -100,9 +143,13 @@ def iniciar_jogo():
                 mapa.mudar_mapa("direita")
                 player.x = 10
                 player.rect.left = player.x
+
+                zumbi.spawn("direita")
             else:
                 player.x = larguraTela - player.rect.width
                 player.rect.left = player.x
+
+                zumbi.spawn("esquerda")
                 # pygame.time.wait(150) removido por enquanto, porque dá a sensação de travamento
             
         elif player.rect.left < 0:

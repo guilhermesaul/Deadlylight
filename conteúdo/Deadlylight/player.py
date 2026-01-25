@@ -1,9 +1,11 @@
 import pygame
 from ui.config import *
+from ui.tiros import Bullet
 
 class Player(pygame.sprite.Sprite):
     def __init__(self,):
         super().__init__()
+        self.bullets = pygame.sprite.Group()
         self.andar_direita = []
         self.andar_esquerda = []
         self.andar_direita_glock = []
@@ -102,6 +104,14 @@ class Player(pygame.sprite.Sprite):
                         self.image = self.andar_esquerda[0]
 
         self.image = pygame.transform.scale(self.image, (64*3, 64*3))
+    
+    def atirar(self):
+        if self.segurando_glock:
+            # Ajusta a posição de saída da bala (perto da mão do player)
+            pos_x = self.rect.centerx + (50 if self.direcao == "direita" else -50)
+            pos_y = self.rect.centery - 50
+            nova_bala = Bullet(pos_x, pos_y, self.direcao)
+            self.bullets.add(nova_bala)
         
     def draw(self, tela):
         tela.blit(self.image, self.rect)
