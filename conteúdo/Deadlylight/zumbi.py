@@ -6,7 +6,8 @@ from ui.config import larguraTela, alturaTela
 class Zombie(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.vida = 2
+        self.vida = 10  # Increased to handle different damage values
+        self.max_vida = 10
         self.andar_direita = []
         self.andar_esquerda = []
 
@@ -73,6 +74,24 @@ class Zombie(pygame.sprite.Sprite):
 
     def draw(self, tela):
         tela.blit(self.image, self.rect)
+    
+    def get_hitbox_region(self, bullet_y):
+        """Determine which region of zombie was hit based on bullet Y position"""
+        zombie_height = self.rect.height
+        zombie_top = self.rect.top
+        
+        # Head region: top 25% of zombie
+        head_bottom = zombie_top + (zombie_height * 0.25)
+        # Torso region: 25% - 60% of zombie
+        torso_bottom = zombie_top + (zombie_height * 0.60)
+        # Legs region: 60% - 100% of zombie
+        
+        if bullet_y < head_bottom:
+            return "head"
+        elif bullet_y < torso_bottom:
+            return "torso"
+        else:
+            return "legs"
 
     def spawn(self, lado_oposto_ao_player):
         if lado_oposto_ao_player == "direita":

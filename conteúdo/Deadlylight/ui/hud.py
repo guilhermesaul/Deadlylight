@@ -46,7 +46,7 @@ class Hud:
         tela.blit(self.imagem, (1160, 21))
         return tela.blit(self.texto_formatado_40, (1200, 20))
     
-    def exibir_arma(self, tela, eventos):
+    def exibir_arma(self, tela, eventos, ammo):
         for evento in eventos:
             if evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_1:
@@ -56,7 +56,10 @@ class Hud:
             self.imagem = pygame.image.load(self.caminho)
             self.imagem = pygame.transform.scale(self.imagem, (32*2, 32*2))
             tela.blit(self.imagem, (70, 20))
-            tela.blit(self.texto_munição, (140, 25))
+            # Display current ammo
+            municao_text = f"| {ammo} munições"
+            texto_municao = self.fonte_40.render(municao_text, True, self.cor_preto)
+            tela.blit(texto_municao, (140, 25))
 
     def exibe_entrar(self, tela):
         self.mensagem_entrar = "Aperte 'E' para entrar."

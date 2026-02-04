@@ -6,6 +6,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self,):
         super().__init__()
         self.bullets = pygame.sprite.Group()
+        self.ammo = 999  # Maximum ammo
         self.andar_direita = []
         self.andar_esquerda = []
         self.andar_direita_glock = []
@@ -105,13 +106,21 @@ class Player(pygame.sprite.Sprite):
 
         self.image = pygame.transform.scale(self.image, (64*3, 64*3))
     
-    def atirar(self):
-        if self.segurando_glock:
-            # Ajusta a posição de saída da bala (perto da mão do player)
-            pos_x = self.rect.centerx + (50 if self.direcao == "direita" else -50)
-            pos_y = self.rect.centery - 50
-            nova_bala = Bullet(pos_x, pos_y, self.direcao)
+    def atirar(self, mouse_x, mouse_y):
+        if self.segurando_glock and self.ammo > 0:
+            # Calculate weapon position based on player direction and position
+            if self.direcao == "direita":
+                # Weapon is on the right side, slightly forward and at mid-height
+                weapon_x = self.rect.centerx + 60
+                weapon_y = self.rect.centery + 10
+            else:
+                # Weapon is on the left side
+                weapon_x = self.rect.centerx - 60
+                weapon_y = self.rect.centery + 10
+            
+            nova_bala = Bullet(weapon_x, weapon_y, self.direcao, mouse_x, mouse_y)
             self.bullets.add(nova_bala)
+            self.ammo -= 1  # Consume one bullet per shot
         
     def draw(self, tela):
         tela.blit(self.image, self.rect)
