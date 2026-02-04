@@ -30,27 +30,37 @@ y_ui_loja = alturaTela // 2 - ui_loja.get_height() // 2
 
 
 def spawn_zombies_for_level(city_level, player_x):
-    """Spawn zombies based on city level. City 1 = 4 zombies, City 2 = 5, etc."""
-    zombies = pygame.sprite.Group()
+    """Spawn zombies based on city level. City maps get more zombies."""
+    new_zombies = pygame.sprite.Group()
     
-    # Determine number of zombies based on city level
-    if city_level == 9:  # Final level - zombie horde
-        num_zombies = 20
-    else:
-        num_zombies = 3 + city_level  # City 1 = 4, City 2 = 5, etc.
+    # Map indices to zombie count
+    # Index 0: path 1 - 2 zombies (easy start)
+    # Index 1: city 1 - 4 zombies
+    # Index 2: path 2 - 3 zombies
+    # Index 3: city 2 - 5 zombies
+    # Index 4: path 3 - 4 zombies
+    # Index 5: city 3 - 6 zombies
+    # Index 6: path 4 - 5 zombies
+    # Index 7: city 4 - 7 zombies
+    # Index 8: final path - 20 zombies (horde)
+    
+    zombie_counts = [2, 4, 3, 5, 4, 6, 5, 7, 20]
+    num_zombies = zombie_counts[city_level] if city_level < len(zombie_counts) else 10
     
     import random
     for i in range(num_zombies):
-        # Spawn zombies at various positions, not too close to player
-        if random.choice([True, False]):
-            x = random.randint(player_x + 300, larguraTela - 100)
-        else:
-            x = random.randint(100, max(100, player_x - 300))
+        # Spawn zombies at various positions across the screen
+        # Avoid spawning too close to player (within 200 pixels)
+        x = random.randint(100, larguraTela - 100)
+        # Make sure zombies aren't too close to player spawn position
+        while abs(x - player_x) < 200:
+            x = random.randint(100, larguraTela - 100)
+        
         y = random.randint(300, 400)
         zombie = Zombie(x, y)
-        zombies.add(zombie)
+        new_zombies.add(zombie)
     
-    return zombies
+    return new_zombies
 
 
 def iniciar_jogo():
@@ -190,7 +200,8 @@ def iniciar_jogo():
                 
                 # Spawn zombies based on the current map index (city level)
                 zombies.empty()  # Clear existing zombies
-                zombies.update(spawn_zombies_for_level(mapa.indiceAtual, player.rect.x))
+                new_zombies = spawn_zombies_for_level(mapa.indiceAtual, player.rect.x)
+                zombies.add(new_zombies)
             else:
                 player.x = larguraTela - player.rect.width
                 player.rect.left = player.x
@@ -203,7 +214,8 @@ def iniciar_jogo():
                 
                 # Spawn zombies based on the current map index (city level)
                 zombies.empty()  # Clear existing zombies
-                zombies.update(spawn_zombies_for_level(mapa.indiceAtual, player.rect.x))
+                new_zombies = spawn_zombies_for_level(mapa.indiceAtual, player.rect.x)
+                zombies.add(new_zombies)
             else:
                 player.x = 1
                 player.rect.left = player.x
